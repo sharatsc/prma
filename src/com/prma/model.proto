@@ -1,0 +1,58 @@
+package prma;
+option java_package = "com.prma";
+option java_outer_classname = "Structures";
+
+message Attribute {
+	optional uint32 index = 1;
+	required float value = 3 [default = 1.0];
+	optional string string_value = 4;
+	optional float weight = 5 [default = 1.0];
+}
+
+message Instance {
+	optional float label = 1;
+	optional string string_label = 2;
+	optional float weight = 3 [default = 1.0];
+	repeated Attribute attributes = 4;
+	optional float prior = 5;
+}
+
+message Weight {
+	optional uint32 index = 1;
+	optional float gradient_sum = 2;
+	required float value = 3;
+	optional uint32 count = 4;
+	extensions 100 to max;
+}
+
+message GeneralizedLinearModel {
+	optional ModelConfig config = 1;
+  	optional Weight bias = 2;
+	repeated Weight weights = 3;
+}
+
+message MulticlassModel {
+  message ClassModel {
+    optional GeneralizedLinearModel model = 1;
+    optional float label = 2;
+    optional string string_label = 3;
+  }
+  repeated ClassModel class_model = 1;
+}
+
+message SerializedModel {
+  optional GeneralizedLinearModel linear_model = 1;
+  optional MulticlassModel multiclass_model = 2;
+}
+
+message ModelConfig {
+  enum RegressionType{
+    LINEAR_REGRESSION = 0;
+    LOGISTIC_REGRESSION = 1;
+    QUANTILE_REGRESSION = 2;
+  }
+  optional RegressionType regression_type = 1 [default = LOGISTIC_REGRESSION];
+  extensions 2 to max;
+}
+
+

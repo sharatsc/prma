@@ -1,0 +1,23 @@
+package prma;
+option java_package = "com.prma";
+option java_outer_classname = "Solvers";
+import "model.proto";
+
+message SGDConfig {
+  optional float learning_rate = 1 [default = 0.1];
+  optional float l2_regularization = 2 [default = 0.1];
+  optional float l1_regularization = 3 [default = 0.0];
+  extend ModelConfig {
+    optional SGDConfig sgd_config = 1001;
+  }
+}
+
+message MultiSGDConfig {
+  optional float learning_rate = 1 [default = 0.1];
+  required int32 num_classes = 2 [default = 2];
+  optional float l2_regularization = 3 [default = 0.1];
+  optional float l1_regularization = 4 [default = 0.0];
+  extend ModelConfig {
+    optional MultiSGDConfig multi_sgd_config = 1002;
+  }
+}

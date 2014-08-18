@@ -1,0 +1,52 @@
+* Architecture choices
+** Java
+*** 
+/training/{models}
+/prediction/{models}
+#/extractor/{method}
+/algorithms/
+../classifier
+../regression
+../recommendation
+../pereception/
+../../vision
+../../speech
+../neighbor
+
+
+
+# Setting up git
+sudo apt-get install git
+https://help.github.com/articles/set-up-git
+https://help.github.com/articles/ssh-key-setup
+
+# Configuring tomcat
+http://radu.cotescu.com/configure-tomcat-6-ubuntu-eclipse/
+sudo apt-get install tomcat6
+cd /usr/share/tomcat6
+sudo ln -s /var/lib/tomcat6/conf conf
+sudo ln -s /etc/tomcat6/policy.d/03catalina.policy conf/catalina.policy
+sudo ln -s /var/log/tomcat6 log
+sudo chmod -R 777 /usr/share/tomcat6/conf
+#setting up eclipse
+Run> Run Configurations > Apache Tomcat
+
+# setting up eclipse
+# download java ee edition of eclipse. (sudo apt-get will not do)
+http://www.eclipse.org
+# Installing protocol buffers
+sudo apt-get install protobuf-compiler
+# Integrating with eclipse
+http://protoclipse.googlecode.com/svn/trunk/site/
+#Installing amazon pluging for eclipse
+# First install Web tools platform SDK
+http://aws.amazon.com/eclipse/
+#installing git
+http://marketplace.eclipse.org/content/egit-git-team-provider#.UJ76V-A0lyC
+#installing curl
+sudo apt-get install curl
+
+#TODO
+Mixed CSV.
+Atleast some extractors.
+recommendation - sparse svd.

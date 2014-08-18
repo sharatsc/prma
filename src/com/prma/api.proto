@@ -1,0 +1,43 @@
+package prma;
+option java_package = "com.prma";
+option java_outer_classname = "API";
+
+import "model.proto";
+
+enum InputType {
+  LIBSVM = 0;
+  CSV = 1;
+  TEXT = 2;
+}
+
+enum ModelType {
+  REGRESSION = 0;
+  CLASSIFICATION = 1;
+  MULTI_CLASSIFICATION = 2;
+}
+
+message TrainingRequest {
+  repeated string input_file  = 1;
+  optional InputType input_type = 2 [default = LIBSVM];
+  optional ModelType model_type = 3 [default = CLASSIFICATION];
+  optional string model_id = 4;
+  optional int32 max_iterations = 5 [default = 1];
+}
+
+message TrainingResponse {
+  optional string url = 1;
+  optional string error = 2;
+  optional string model_id = 3;
+  optional TrainingRequest request = 4;
+}
+
+message PredictionRequest {
+   repeated string input_instance = 1;
+   repeated Instance proto_instance = 2;
+}
+
+message PredictionResponse {
+    repeated float value = 1;
+    repeated float label = 2;
+    repeated string string_label = 3;
+}
